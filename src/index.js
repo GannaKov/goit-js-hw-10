@@ -11,29 +11,24 @@ const base_url = 'https://restcountries.com/v3.1/name/';
 function onInput(evt) {
   evt.preventDefault(); //???
   let inputValue = evt.target.value;
-  console.dir(inputValue);
+
   fetchCountries(inputValue)
-    // .then(countries => renderCountryList(countries))
-    // .catch(error => console.log(error));
+    .then(countries => renderCountryList(countries))
+    .catch(error => console.log(error));
 }
 function fetchCountries(name) {
-    const resp = fetch(
-        `${base_url}/${name}?fields=name,capital,population,flags,languages`
-    )
-    resp.then(response => {
-        if (!response.ok) {
-            throw new Error(response.status);
-        }
-        return response.json();
-    }).then(countries => {
-        const markup=renderCountryList(countries)
-        countryList.innerHTML = markup;
+  return fetch(
+    `${base_url}/${name}?fields=name,capital,population,flags,languages`
+  ).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
     }
-    ).catch(err => console.log(err))
-
+    return response.json();
+  });
+}
 
 function renderCountryList(countries) {
-  return countries
+  const markup = countries
     .map(country => {
       return `<li>
   <img src="${country.flags.svg}" alt="${country.name.official}" width="60px" >
@@ -41,7 +36,13 @@ function renderCountryList(countries) {
 </li>`;
     })
     .join('');
-//   console.log(markup);
- 
+  console.log(markup);
+  countryList.innerHTML = markup;
 }
+// .then(countries => {
+//     const markup=renderCountryList(countries)
+//     countryList.innerHTML = markup;
+// }
+// ).catch(err => console.log(err))
+
 // https://restcountries.com/v3.1/name/peru?fields=name,capital,population,flags,languages
