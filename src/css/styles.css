@@ -18,6 +18,16 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+/* --------------------*/
+p,
+h1,
+h2 {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding-left: 0;
+}
 ul {
   list-style: none;
 }
@@ -29,6 +39,7 @@ img {
 .country-list li {
   display: flex;
   margin-bottom: 20px;
+  align-items: center;
 }
 p {
   letter-spacing: 0.03em;

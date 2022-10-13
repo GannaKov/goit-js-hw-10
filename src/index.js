@@ -16,18 +16,15 @@ function onInput(evt) {
   let inputValue = evt.target.value.trim();
   if (inputValue === '') {
     console.log('i', inputValue); //del
-    // markup = '';
-    // countryList.innerHTML = markup;
-    //&& markup
+    countryInfo.innerHTML = '';
     countryList.innerHTML = '';
     return;
   }
   console.log(inputValue);
   fetchCountries(inputValue)
     .then(countries => {
-      console.log(...countries);
       if (countries.length > 10) {
-        console.log('da');
+        countryList.innerHTML = '';
         Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
@@ -54,6 +51,7 @@ function fetchCountries(name) {
 }
 
 function renderCountryList(countries) {
+  countryInfo.innerHTML = '';
   const markup = countries
     .map(country => {
       return `<li>
@@ -67,6 +65,7 @@ function renderCountryList(countries) {
 }
 
 function renderCountryInfoCard(country) {
+  countryList.innerHTML = '';
   const markup = `<div class="tiltle-row">
   <img src="${country.flags.svg}" alt="${country.name.official}" width="60px" />
   <h1>${country.name.official}</h1>
@@ -85,8 +84,7 @@ function renderCountryInfoCard(country) {
     <p>${Object.values(country.languages)}</p>
   </li>
 </ul>`;
-  console.log(...Object.values(country.languages));
-  //   markup.join('');
+
   countryInfo.innerHTML = markup;
 }
 
