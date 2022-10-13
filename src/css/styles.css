@@ -35,3 +35,13 @@ p {
   font-size: 18px;
   line-height: 1.17;
 }
+.tiltle-row {
+  display: flex;
+}
+.country__card h2 {
+  margin-right: 20px;
+}
+.country__card li {
+  display: flex;
+  align-items: baseline;
+}
