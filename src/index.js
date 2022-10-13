@@ -1,6 +1,7 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 const DEBOUNCE_DELAY = 300;
+let markup;
 const inputEl = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
@@ -10,9 +11,12 @@ const base_url = 'https://restcountries.com/v3.1/name/';
 // const params = new URLSearchParams({});
 function onInput(evt) {
   evt.preventDefault(); //???
-  let inputValue = evt.target.value;
+  let inputValue = evt.target.value.trim();
   if (inputValue === '') {
-    console.log('i', inputValue);
+    console.log('i', inputValue); //del
+    // markup = '';
+    // countryList.innerHTML = markup;
+    //&& markup
     countryList.innerHTML = '';
     return;
   }
@@ -33,7 +37,7 @@ function fetchCountries(name) {
 }
 
 function renderCountryList(countries) {
-  const markup = countries
+  markup = countries
     .map(country => {
       return `<li>
   <img src="${country.flags.svg}" alt="${country.name.official}" width="60px" >
