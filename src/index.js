@@ -2,7 +2,7 @@ import { Notify } from 'notiflix';
 import 'notiflix/dist/notiflix-3.2.5.min.css';
 import './css/styles.css';
 import debounce from 'lodash.debounce';
-import fetchCountries from './customFunction/fetchCountries';
+import { fetchCountries } from './customFunction/fetchCountries';
 const DEBOUNCE_DELAY = 300;
 const notifyOptions = {
   position: 'center-top',
@@ -17,6 +17,7 @@ inputEl.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(evt) {
   let inputValue = evt.target.value.trim();
+
   if (inputValue === '') {
     clearCountryInfoCard();
     clearCountryList();
