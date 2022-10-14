@@ -36,9 +36,16 @@ img {
   /* max-height: 55px; */
   margin-right: 30px;
 }
+.country-list {
+  margin-left: 30px;
+}
+.country-info {
+  margin-left: 30px;
+}
 .country-list li {
   display: flex;
   margin-bottom: 20px;
+
   align-items: center;
 }
 p {
@@ -55,4 +62,7 @@ p {
 .country__card li {
   display: flex;
   align-items: baseline;
+}
+#search-box {
+  margin-left: 30px;
 }

@@ -16,7 +16,6 @@ const countryInfo = document.querySelector('.country-info');
 inputEl.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput(evt) {
-  //   evt.preventDefault(); //???
   let inputValue = evt.target.value.trim();
   if (inputValue === '') {
     clearCountryInfoCard();
@@ -27,7 +26,6 @@ function onInput(evt) {
   fetchCountries(inputValue)
     .then(countries => {
       if (countries.length > 10) {
-        // countryList.innerHTML = '';
         clearCountryList();
         Notify.info(
           'Too many matches found. Please enter a more specific name.',
@@ -35,19 +33,18 @@ function onInput(evt) {
         );
         return;
       }
+
       if (countries.length === 1) {
-        // countryList.innerHTML = '';
-        // clearCountryList();
         renderCountryInfoCard(...countries);
         return;
       }
+
       renderCountryList(countries);
     })
     .catch(error => console.log(error));
 }
 
 function renderCountryList(countries) {
-  //   countryInfo.innerHTML = '';
   clearCountryInfoCard();
   const markup = countries
     .map(country => {
@@ -62,7 +59,6 @@ function renderCountryList(countries) {
 }
 
 function renderCountryInfoCard(country) {
-  //   countryList.innerHTML = '';
   clearCountryList();
   const markup = `<div class="tiltle-row">
   <img src="${country.flags.svg}" alt="${country.name.official}" width="60px" />
@@ -85,21 +81,10 @@ function renderCountryInfoCard(country) {
 
   countryInfo.innerHTML = markup;
 }
+
 function clearCountryList() {
   countryList.innerHTML = '';
 }
 function clearCountryInfoCard() {
   countryInfo.innerHTML = '';
 }
-// function notifyFailure() {
-//   Notify.failure('Oops, there is no country with that name', notifyOptions);
-// }
-
-// -----------------------------
-// .then(countries => {
-//     const markup=renderCountryList(countries)
-//     countryList.innerHTML = markup;
-// }
-// ).catch(err => console.log(err))
-
-// https://restcountries.com/v3.1/name/peru?fields=name.nativeName,capital,population,flags,languages
