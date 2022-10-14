@@ -2,12 +2,12 @@ import { Notify } from 'notiflix';
 import 'notiflix/dist/notiflix-3.2.5.min.css';
 import './css/styles.css';
 import debounce from 'lodash.debounce';
+import fetchCountries from './customFunction/fetchCountries';
 const DEBOUNCE_DELAY = 300;
 
 const inputEl = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
-const base_url = 'https://restcountries.com/v3.1/name/';
 
 inputEl.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
@@ -39,17 +39,6 @@ function onInput(evt) {
       renderCountryList(countries);
     })
     .catch(error => console.log(error));
-}
-function fetchCountries(name) {
-  return fetch(
-    `${base_url}/${name}?fields=name,capital,population,flags,languages`
-  ).then(response => {
-    if (!response.ok) {
-      Notify.failure('Oops, there is no country with that name');
-      throw new Error(response.status);
-    }
-    return response.json();
-  });
 }
 
 function renderCountryList(countries) {
