@@ -25,14 +25,6 @@ function onInput(evt) {
   }
 
   fetchCountries(inputValue)
-    .then(response => {
-      if (!response.ok) {
-        notifyFailure();
-
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
     .then(countries => {
       if (countries.length > 10) {
         // countryList.innerHTML = '';
@@ -99,9 +91,9 @@ function clearCountryList() {
 function clearCountryInfoCard() {
   countryInfo.innerHTML = '';
 }
-function notifyFailure() {
-  Notify.failure('Oops, there is no country with that name', notifyOptions);
-}
+// function notifyFailure() {
+//   Notify.failure('Oops, there is no country with that name', notifyOptions);
+// }
 
 // -----------------------------
 // .then(countries => {
