@@ -7,21 +7,19 @@ const DEBOUNCE_DELAY = 300;
 const inputEl = document.querySelector('#search-box');
 const countryList = document.querySelector('.country-list');
 const countryInfo = document.querySelector('.country-info');
+const base_url = 'https://restcountries.com/v3.1/name/';
+
 inputEl.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
-const base_url = 'https://restcountries.com/v3.1/name/';
-// const params = new URLSearchParams({});
 function onInput(evt) {
-  evt.preventDefault(); //???
+  //   evt.preventDefault(); //???
   let inputValue = evt.target.value.trim();
   if (inputValue === '') {
-    // countryInfo.innerHTML = '';
-    // countryList.innerHTML = '';
     clearCountryInfoCard();
     clearCountryList();
     return;
   }
-  console.log(inputValue);
+
   fetchCountries(inputValue)
     .then(countries => {
       if (countries.length > 10) {
@@ -34,7 +32,7 @@ function onInput(evt) {
       }
       if (countries.length === 1) {
         // countryList.innerHTML = '';
-        clearCountryList();
+        // clearCountryList();
         renderCountryInfoCard(...countries);
         return;
       }
