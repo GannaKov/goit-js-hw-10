@@ -15,23 +15,26 @@ function onInput(evt) {
   evt.preventDefault(); //???
   let inputValue = evt.target.value.trim();
   if (inputValue === '') {
-    console.log('i', inputValue); //del
-    countryInfo.innerHTML = '';
-    countryList.innerHTML = '';
+    // countryInfo.innerHTML = '';
+    // countryList.innerHTML = '';
+    clearCountryInfoCard();
+    clearCountryList();
     return;
   }
   console.log(inputValue);
   fetchCountries(inputValue)
     .then(countries => {
       if (countries.length > 10) {
-        countryList.innerHTML = '';
+        // countryList.innerHTML = '';
+        clearCountryList();
         Notify.info(
           'Too many matches found. Please enter a more specific name.'
         );
         return;
       }
       if (countries.length === 1) {
-        countryList.innerHTML = '';
+        // countryList.innerHTML = '';
+        clearCountryList();
         renderCountryInfoCard(...countries);
         return;
       }
@@ -52,7 +55,8 @@ function fetchCountries(name) {
 }
 
 function renderCountryList(countries) {
-  countryInfo.innerHTML = '';
+  //   countryInfo.innerHTML = '';
+  clearCountryInfoCard();
   const markup = countries
     .map(country => {
       return `<li>
@@ -61,12 +65,13 @@ function renderCountryList(countries) {
 </li>`;
     })
     .join('');
-  //   console.log(markup);
+
   countryList.innerHTML = markup;
 }
 
 function renderCountryInfoCard(country) {
-  countryList.innerHTML = '';
+  //   countryList.innerHTML = '';
+  clearCountryList();
   const markup = `<div class="tiltle-row">
   <img src="${country.flags.svg}" alt="${country.name.official}" width="60px" />
   <h1>${country.name.official}</h1>
@@ -87,6 +92,12 @@ function renderCountryInfoCard(country) {
 </ul>`;
 
   countryInfo.innerHTML = markup;
+}
+function clearCountryList() {
+  countryList.innerHTML = '';
+}
+function clearCountryInfoCard() {
+  countryInfo.innerHTML = '';
 }
 
 // -----------------------------
