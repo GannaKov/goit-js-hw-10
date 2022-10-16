@@ -89,3 +89,99 @@ function clearCountryList() {
 function clearCountryInfoCard() {
   countryInfo.innerHTML = '';
 }
+// -------------
+// // Занятие 10.2
+// // https://the-one-api.dev/documentation
+// // Файл 1
+// const BASE_URL = 'https://the-one-api.dev/v2/';
+// const character = 'character';
+// const movie = 'movie';
+// const bearer = 'Bearer XJlq9OFMcHAy8pAQK7xj';
+// const options = {
+//   headers: {
+//     Authorization: bearer,
+//   },
+// };
+
+// export function apiRings(page = 1) {
+//   // https://the-one-api.dev/v2/character?limit=10&page=${page}
+//   return fetch(`${BASE_URL}${character}?limit=300&page=${page}`, options).then(
+//     response => {
+//       if (!response.ok) {
+//         throw new Error('fail');
+//       }
+//       return response.json();
+//     }
+//   );
+// }
+
+// export function apiRingsMovie() {
+//   // https://the-one-api.dev/v2/character?limit=10&page=${page}
+//   return fetch(`${BASE_URL}${movie}`, options).then(response => {
+//     if (!response.ok) {
+//       throw new Error('fail');
+//     }
+//     return response.json();
+//   });
+// }
+// //файл 2
+// const base_url = 'http://api.weatherapi.com/v1';
+// const KEY = '4202b3fa59ea4adf832162138221110';
+// const params = new URLSearchParams({
+//   key: KEY,
+//   q: 'Lviv',
+//   days: 7,
+// });
+
+// export function apiWeather() {
+//   return fetch(`${base_url}/forecast.json?${params}`).then(response => {
+//     if (!response.ok) {
+//       throw new Error();
+//     }
+//     return response.json();
+//   });
+// }
+// // Основной файл
+// // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+// import { apiRings, apiRingsMovie } from './js/apiRings';
+// import { apiWeather } from './js/apiWeather';
+// import markup from './js/templates/markup.hbs';
+
+// const list = document.querySelector('.list');
+// const guard = document.querySelector('.guard');
+// const options = {
+//   root: null,
+//   rootMargin: '50px',
+//   threshold: 1,
+// };
+// const observer = new IntersectionObserver(onLoad, options);
+// let page = 1;
+
+// apiRings().then(data => {
+//   list.insertAdjacentHTML('beforeend', markup(data.docs));
+//   observer.observe(guard);
+// });
+// // apiWeather().then(data => run(data))
+// // apiWeather().then(run)
+
+// // function run(value){
+// //     console.log(value);
+// // }
+
+// // apiRingsMovie().then(console.log).catch(err => console.log(err))
+
+// function onLoad(entries) {
+//   entries.forEach(entry => {
+//     console.log(entry);
+//     if (entry.isIntersecting) {
+//       //true
+//       page += 1;
+//       apiRings(page).then(data => {
+//         list.insertAdjacentHTML('beforeend', markup(data.docs));
+//         if (data.page === data.pages) {
+//           observer.unobserve(guard);
+//         }
+//       });
+//     }
+//   });
+// }
